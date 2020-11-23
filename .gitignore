@@ -1,0 +1,22 @@
+*.Rproj.user
+*.Rhistory
+*.RData
+*.Ruserdata
+
+*.xml
+*.RData
+*.csv*
+
+.Rproj.user
+
+*.xml
+*.json
+*.txt
+*.dat
+*.csv
+
+tmp
+
+outputGlobal/
+# R Environment Variables
+.Renviron
