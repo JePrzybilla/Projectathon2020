@@ -1,0 +1,26 @@
+---
+title: "Testanfragen mit fhircrackr zum Projectathon 2020"
+author: "Thomas Peschel, Julia Gantner und Jens Przybilla"
+date: "23 11 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Einleitung
+
+Mit den hier abgelegten R-Skripten kann man auf dem bereitgestellten Testdatensatz unter dem Endpunkt   
+"https://mii-agiop-3p.life.uni-leipzig.de/fhir/"   
+Anfragen mit Hilfe des R-packages fhircrackr stellen und erhält im Ergebnis csv Tabellen zur weiteren Auswertung. Viele der Fragen sind schon bei den Anfragen mit FHIR-search formuliert worden.
+
+
+## Test der R-Skripte auf eigenem Server
+Sollen die R-Skripte auf dem eigenen Server getestet werden, dann muss in den einzelnen R-Skripten die Zeile in der der Endpunkt steht mit dem lokalen Server ersetzt werden.
+
+```{r endpoint}
+endpoint <- "https://mii-agiop-3p.life.uni-leipzig.de/fhir/"
+```
+
+
