@@ -23,4 +23,7 @@ Sollen die R-Skripte auf dem eigenen Server getestet werden, dann muss in den ei
 endpoint <- "https://mii-agiop-3p.life.uni-leipzig.de/fhir/"
 ```
 
+## Starten der R-Skripte
+Starten Sie das gewünschte R-Skript im R-Studio oder auf der Kommandozeile mit dem Befehl
+Rscript --
 

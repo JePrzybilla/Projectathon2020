@@ -1,6 +1,6 @@
-# Last Change: at 13.11.2020
+# Last Change: at 27.11.2020
 # Thomas Peschel and Jens Przybilla
-#
+# Counts and plots a histogram of the resources of the FHIR server
 library(fhircrackr)
 library(dplyr)
 library(ggplot2)
@@ -15,15 +15,9 @@ output_directory <- "./outputGlobal/ResultCount"
 if(! dir.exists(output_directory)) {
   dir.create(output_directory, recursive = T)
   setwd(back)
-}else{
-  #löschen der vorhandenen Dateien im outputGlobal/test1 Ordner.
-  #setwd( output_directory )
-  #flist <- list.files(getwd())  %>% print()
-  #file.remove(flist)
-  #setwd(back)
-}
+}else{}
 
-#endpoint <- "http://localhost:8080/fhir"
+#Change the endpoint here if ypu want to use another endpoint
 all_endpoints <- list(hapiOpen = "https://mii-agiop-3p.life.uni-leipzig.de/fhir")
 sel_endpoints_names <- "hapiOpen"
 endpoints <- all_endpoints[sel_endpoints_names]
@@ -79,7 +73,7 @@ dfm <- reshape2::melt(df, 'Resource')
 names(dfm) <- c('resource', 'server', 'count')[match(names(dfm), c('Resource', 'variable', 'value'))]
 dfm$`count [log10]` <- log10(1 + dfm$count)
 
-
+#Plot a histogram of the ressources
 g <- ggplot(dfm) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = 'none') +
@@ -103,13 +97,13 @@ g <- ggplot(dfm) +
   scale_fill_discrete(h=c(120,240)) +
   facet_grid(server ~ .)
 
-ggsave(paste0("HapiTestDaten_count_all_resources_", time_string, ".png"), g, dpi = 300 , width = 24, height = 12)
+#Save the histogram of the FHIR ressources
+ggsave(paste0("HapiTestData_CountAllServerResources_", time_string, ".png"), g, dpi = 300 , width = 24, height = 12)
 ti <- (proc.time() - start_time)/60.
-write.table(t(data.matrix(ti)), file = "LaufZeitLeipzigBlaze_Min.dat",row.names = F, quote = F )
-cat("Laufzeit von count_all_resources.R ", ti, " Minuten.\n")
+write.table(t(data.matrix(ti)), file = "RunningTime_Min.dat",row.names = F, quote = F )
+cat("Running Time: ", ti, " minutes.\n")
 setwd(back)
-print("Last Update: 11.11.2020")
-print(paste0("Working Test Date:", Sys.Date()))
+
 
 
 
