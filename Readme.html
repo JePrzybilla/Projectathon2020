@@ -426,7 +426,7 @@ Anfragen mit Hilfe des R-packages fhircrackr und dazu bereitgestellten Abfragesk
 <div id="test-der-r-skripte-auf-eigenem-server" class="section level2">
 <h2>Test der R-Skripte auf eigenem Server</h2>
 <p>Die Skripte sind getestet und sollten auf dem für den Projectathon benutzten Server mit Testdaten sinnvolle Resultate erzielen.</p>
-<pre class="r"><code>endpoint &lt;- &quot;https://mii-agiop-3p.life.uni-leipzig.de/fhir/&quot;</code></pre>
+<p>endpoint &lt;- “<a href="https://mii-agiop-3p.life.uni-leipzig.de/fhir/" class="uri">https://mii-agiop-3p.life.uni-leipzig.de/fhir/</a>”</p>
 <p>Sollen die R-Skripte auf dem eigenen Server getestet werden, dann muss in den einzelnen R-Skripten die Zeile in der der Endpunkt steht durch den gewünschten lokalen Server ersetzt werden.</p>
 </div>
 <div id="starten-der-r-skripte" class="section level2">
@@ -454,18 +454,28 @@ Die zugehörige FHIR search Anfrage lautet:</p>
 <p>base/Patient?gender=male</p>
 </div>
 <div id="skript-findallpatients_v3.r" class="section level4">
-<h4>3. Skript: FindAllPatients_v3.R</h4>
+<h4>4. Skript: FindAllPatients_v3.R</h4>
 <p>Hier ist die FHIR search Anfrage genau wie im 2. Skript. Es wird aber im R-Skript noch ein “design” angegeben, dass die Spalten der csv-Tabelle definiert.<br />
 Die zugehörige FHIR search Anfrage lautet wieder:</p>
 <p>/base/Patient?</p>
 </div>
 <div id="skript-findallobservations_v1.r" class="section level4">
-<h4>4.Skript: FindAllObservations_v1.R</h4>
-<p>Mit diesem Skript fragen wir alle Observations ab und schreiben Sie in eine csv-Tabelle. Wir haben hier den Parameter _count=500 hinzugefügt. Dieser erhöht die Anzahl der Observations pro bundle. Es ist mitunter so, dass ein xyz to be done</p>
-<p>base/Observation?_count=500</p>
+<h4>5.Skript: FindAllObservations_v1.R</h4>
+<p>Mit diesem Skript fragen wir alle Observations des Servers ab und schreiben Sie in eine csv-Tabelle. Wir haben hier den Parameter _count=100 hinzugefügt. Dieser erhöht die Anzahl der Observations pro bundle. Es ist mitunter so (und auf dem Testserver auch), dass nur eine bestimmte Zahl bundles pro Anfrage gestellt werden darf. Das ist eine Server Einstellung. Die FHIR search Voreinstellung ist hier _count=20. Das macht hier bei über 4000 Observations mehr als 200 bundles und dann gibt es den Fehler HTTP code 429. Die zugehörige FHIR search Anfrage lautet:</p>
+<p>base/Observation?_count=100</p>
+</div>
+<div id="skript-findallmedicationstatements_v1.r" class="section level4">
+<h4>6.Skript: FindAllMedicationStatements_v1.R</h4>
+<p>Dieses Skript ist analog zm 5. Skript und benötigt auch eine Setzung des _count=100. Die zugehörige FHIR search Anfrage lautet:</p>
+<p>base/MedicationStatement?_count=100</p>
+</div>
+<div id="skript-findallmedications_v1.r" class="section level4">
+<h4>7.Skript: FindAllMedications_v1.R</h4>
+<p>Dieses Skript ist analog zm 6. Skript sucht aber alle Medications und nicht alle MedicationStatements heraus und erzeugt wieder eine csv_Tabelle. Die zugehörige FHIR search Anfrage lautet:</p>
+<p>base/Medication?</p>
 </div>
 <div id="skript-countbmigroups.r" class="section level4">
-<h4>4.Skript: CountBMIGroups.R</h4>
+<h4>8.Skript: CountBMIGroups.R</h4>
 <p>Mit diesem Skript werden mit 2 FHIR search Anfragen die Körpergröße und das Gewicht der Patienten vom Server geladen und mit beiden Größen der Body Maß Index (BMI) berechnet und in 6 verschiedenen Gruppen grafisch dargestellt.<br />
 Die zugehörigen 2 FHIR search Anfragen lauten:</p>
 <p>für die Körpergröße:</p>
@@ -476,13 +486,13 @@ Die zugehörigen 2 FHIR search Anfragen lauten:</p>
 <div id="skripte-mit-bezug-zu-covid19-anfragen." class="section level3">
 <h3>Skripte mit Bezug zu Covid19 Anfragen.</h3>
 <div id="skript-countcovidpatients.r" class="section level4">
-<h4>4.Skript: CountCovidPatients.R</h4>
+<h4>9.Skript: CountCovidPatients.R</h4>
 <p>Mit diesem Skript werden die Patienten IDs ausgelesen und in eiener Tabelle dargestellt, die eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Probe haben.<br />
 Die zugehörige FHIR search Anfrage lautet:</p>
 <p>base/Observation?code=94500-6</p>
 </div>
 <div id="skript-covidagecohorts.r" class="section level4">
-<h4>4.Skript: CovidAgeCohorts.R</h4>
+<h4>10.Skript: CovidAgeCohorts.R</h4>
 <p>Mit diesem Skript werden die Patienten IDs ausgelesen und in eiener Tabelle dargestellt, die eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Proben haben.<br />
 Die zugehörige FHIR search Anfrage lautet:</p>
 <p>base/Observation?code=94500-6&amp;_include=Observation:patient</p>
