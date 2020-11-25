@@ -14,6 +14,8 @@
 *.txt
 *.dat
 *.csv
+*.html
+*.Rmd
 
 tmp
 

@@ -2,7 +2,6 @@
 title: "Testanfragen mit fhircrackr zum Projectathon 2020"
 author: "Thomas Peschel, Julia Gantner und Jens Przybilla"
 date: "23 11 2020"
-output: html_document
 ---
 
 ## Einleitung
