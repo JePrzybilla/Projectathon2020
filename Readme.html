@@ -421,12 +421,73 @@ summary {
 <h2>Einleitung</h2>
 <p>Mit den hier abgelegten R-Skripten kann man auf dem bereitgestellten Testdatensatz unter dem Endpunkt<br />
 “<a href="https://mii-agiop-3p.life.uni-leipzig.de/fhir/" class="uri">https://mii-agiop-3p.life.uni-leipzig.de/fhir/</a>”<br />
-Anfragen mit Hilfe des R-packages fhircrackr Testanfragen stellen und erhält im Ergebnis csv Tabellen zur weiteren Auswertung. Viele der Fragen sind schon bei den Anfragen mit FHIR-search formuliert worden.</p>
+Anfragen mit Hilfe des R-packages fhircrackr und dazu bereitgestellten Abfrageskripten stellen. Als Ergebnis erhält man .csv Tabellen zur weiteren Auswertung. Einige der Fragen sind schon bei den Anfragen mit FHIR-search formuliert worden. Im Folgenden wird der Server-Endpunkt mit base bezeichnet.</p>
 </div>
 <div id="test-der-r-skripte-auf-eigenem-server" class="section level2">
 <h2>Test der R-Skripte auf eigenem Server</h2>
-<p>Sollen die R-Skripte auf dem eigenen Server getestet werden, dann muss in den R-Skripten die Zeile in der der Endpunkt steht mit dem lokalen Server ersetzt werden.</p>
+<p>Die Skripte sind getestet und sollten auf dem für den Projectathon benutzten Server mit Testdaten sinnvolle Resultate erzielen.</p>
 <pre class="r"><code>endpoint &lt;- &quot;https://mii-agiop-3p.life.uni-leipzig.de/fhir/&quot;</code></pre>
+<p>Sollen die R-Skripte auf dem eigenen Server getestet werden, dann muss in den einzelnen R-Skripten die Zeile in der der Endpunkt steht durch den gewünschten lokalen Server ersetzt werden.</p>
+</div>
+<div id="starten-der-r-skripte" class="section level2">
+<h2>Starten der R-Skripte</h2>
+<p>Starten Sie das gewünschte R-Skript im R-Studio oder auf der Kommandozeile mit dem Befehl<br />
+Rscript –vanilla Skriptname.R<br />
+oder im RStudio.</p>
+</div>
+<div id="die-einzelen-beispielskripte" class="section level2">
+<h2>Die einzelen Beispielskripte</h2>
+<p>Die folgenden Skripte stellen FHIR search Anfragen an verschiedene Ressourcen des Testdatensatzes. Sie werden während des Projetathons vorgeführt und erklärt. Diese können dann auch auf eigenen Daten getestet werden. Man kann die Skripte in der angegbenen Reihenfolge durcharbeiten, aber auch eine andere Reihenfolge wählen.</p>
+<div id="skript-countallserverresources.r" class="section level4">
+<h4>1. Skript: CountAllServerResources.R</h4>
+<p>Mit diesem Skript fragt man den im endpoint eingetragenen FHIR-Server nach allen vorhandenen Ressourcen (Metadaten) ab und bekommt diese dann in einer Grafik mit der Anzahl der Ressourcen dargestellt. Damit kann man sich einen guten Überblich über alle auf dem Server vorhandenen Ressourcen verschaffen.</p>
+</div>
+<div id="skript-findallpatients_v1.r" class="section level4">
+<h4>2. Skript: FindAllPatients_v1.R</h4>
+<p>Mit diesem Skript fragt man den im endpoint eingetragenen FHIR-Server nach allen Patienten und ihren zugehörigen Daten, wie Geburtsdatum, etc. ab und leitet diese in eine Tabelle Patient.csv aus.<br />
+Die zugehörige FHIR search Anfrage lautet:</p>
+<p>base/Patient?</p>
+</div>
+<div id="skript-findallpatients_v2.r" class="section level4">
+<h4>3. Skript: FindAllPatients_v2.R</h4>
+<p>Hier werden nur die männlichen Patienten erfragt. Die zugehörige FHIR search Anfrage lautet:</p>
+<p>base/Patient?gender=male</p>
+</div>
+<div id="skript-findallpatients_v3.r" class="section level4">
+<h4>3. Skript: FindAllPatients_v3.R</h4>
+<p>Hier ist die FHIR search Anfrage genau wie im 2. Skript. Es wird aber im R-Skript noch ein “design” angegeben, dass die Spalten der csv-Tabelle definiert.<br />
+Die zugehörige FHIR search Anfrage lautet wieder:</p>
+<p>/base/Patient?</p>
+</div>
+<div id="skript-findallobservations_v1.r" class="section level4">
+<h4>4.Skript: FindAllObservations_v1.R</h4>
+<p>Mit diesem Skript fragen wir alle Observations ab und schreiben Sie in eine csv-Tabelle. Wir haben hier den Parameter _count=500 hinzugefügt. Dieser erhöht die Anzahl der Observations pro bundle. Es ist mitunter so, dass ein xyz to be done</p>
+<p>base/Observation?_count=500</p>
+</div>
+<div id="skript-countbmigroups.r" class="section level4">
+<h4>4.Skript: CountBMIGroups.R</h4>
+<p>Mit diesem Skript werden mit 2 FHIR search Anfragen die Körpergröße und das Gewicht der Patienten vom Server geladen und mit beiden Größen der Body Maß Index (BMI) berechnet und in 6 verschiedenen Gruppen grafisch dargestellt.<br />
+Die zugehörigen 2 FHIR search Anfragen lauten:</p>
+<p>für die Körpergröße:</p>
+<p>base/Observation?code=8302-2</p>
+<p>und für das Gewicht:</p>
+<p>base/Observation?code=29463-7</p>
+</div>
+<div id="skripte-mit-bezug-zu-covid19-anfragen." class="section level3">
+<h3>Skripte mit Bezug zu Covid19 Anfragen.</h3>
+<div id="skript-countcovidpatients.r" class="section level4">
+<h4>4.Skript: CountCovidPatients.R</h4>
+<p>Mit diesem Skript werden die Patienten IDs ausgelesen und in eiener Tabelle dargestellt, die eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Probe haben.<br />
+Die zugehörige FHIR search Anfrage lautet:</p>
+<p>base/Observation?code=94500-6</p>
+</div>
+<div id="skript-covidagecohorts.r" class="section level4">
+<h4>4.Skript: CovidAgeCohorts.R</h4>
+<p>Mit diesem Skript werden die Patienten IDs ausgelesen und in eiener Tabelle dargestellt, die eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Proben haben.<br />
+Die zugehörige FHIR search Anfrage lautet:</p>
+<p>base/Observation?code=94500-6&amp;_include=Observation:patient</p>
+</div>
+</div>
 </div>
 
 

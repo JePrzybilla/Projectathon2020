@@ -37,8 +37,8 @@ endpoint <- "https://mii-agiop-3p.life.uni-leipzig.de/fhir/"
 
 fhir_search_request <- paste0(
   "Observation?",
-  "code=http://loinc.org|85354-9",
-  "&_include=Observation:subject")
+  "code=http://loinc.org%7C85354-9",
+  "&_include=Observation:patient")
 
 fsq <- paste_paths(endpoint, fhir_search_request)
 print(fsq)

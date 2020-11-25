@@ -2,7 +2,7 @@ library(fhircrackr)
 back <- getwd( )
 endpoint <- "https://mii-agiop-3p.life.uni-leipzig.de/fhir/"
 print(endpoint)
-MaxBundle = 500
+MaxBundle = 5000
 
 output_directory <- "./outputGlobal/FindAllObservations_v1"
 
@@ -18,7 +18,7 @@ if(! dir.exists(output_directory)) {
 }
 
 fsq <- paste0(endpoint,"Observation?",
-               "_count=500")
+              "_count=100")
 
 print(fsq)
 bundles <- fhir_search(fsq, max_bundles=MaxBundle, verbose = 2)

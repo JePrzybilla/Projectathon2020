@@ -9,19 +9,14 @@ output_directory <- "./outputGlobal/FindAllMedications_v1"
 if(! dir.exists(output_directory)) {
   dir.create(output_directory, recursive = T)
   setwd(back)
-}else{
-  #löschen der vorhandenen Dateien im outputGlobal/test1 Ordner.
-  #setwd( output_directory )
-  #flist <- list.files(getwd())  %>% print()
-  #file.remove(flist)
-  #setwd(back)
-}
+}else{}
 
-fsq <- paste0( endpoint, "MedicationStatement?")
-
+fsq <- paste0( endpoint, "MedicationStatement?",
+               "_count=100")
 print(fsq)
+
 bundles <- fhir_search(fsq, max_bundles=MaxBundle, verbose = 2)
-fhir_save(bundles, directory="Bundles")
+fhir_save(bundles, directory=output_directory)
 bundle_time <- proc.time() 
 
 design <- list(
@@ -30,9 +25,7 @@ design <- list(
   )
 )
 
-
 list_of_tables <- fhir_crack(bundles, design, sep = " | ", verbose = 2)
-#list_of_tables <- post_processing( list_of_tables )
 
 setwd( output_directory )
 

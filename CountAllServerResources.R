@@ -8,7 +8,6 @@ library(ggplot2)
 print(system('hostname'))
 back <- getwd()
 start_time <- proc.time() 
-(time_string <- gsub('[^0-9]*', '', Sys.time()))
 
 output_directory <- "./outputGlobal/ResultCount"
 
@@ -17,7 +16,8 @@ if(! dir.exists(output_directory)) {
   setwd(back)
 }else{}
 
-#Change the endpoint here if ypu want to use another endpoint
+#Change the endpoint here if you want to use another endpoint
+
 all_endpoints <- list(hapiOpen = "https://mii-agiop-3p.life.uni-leipzig.de/fhir")
 sel_endpoints_names <- "hapiOpen"
 endpoints <- all_endpoints[sel_endpoints_names]
