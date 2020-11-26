@@ -71,10 +71,10 @@ base/MedicationStatement?_count=100
 
 #### 7.Skript: FindAllMedications_v1.R
 
-Dieses Skript ist analog zm 6. Skript sucht aber alle Medications und nicht alle MedicationStatements heraus und erzeugt wieder eine csv_Tabelle.
+Dieses Skript sucht alle Patienten Ressourcen und die zugehörigen Daten heraus, die Aspirin als Medikament erhalten haben. Dieser wird über den ATC code: N06AA09 gesucht. In der Regel gibt man das Codesystem noch an mit http://fhir.de/CodeSystem/dimdi/atc. Momentan funktioniert das leider nur bedingt auf dem HAPI Server.  
 Die zugehörige FHIR search Anfrage lautet:
 
-base/Medication?
+base/Patient?_has:MedicationStatement:patient:medication.code=N06AA09
 
 #### 8.Skript: CountBMIGroups.R
 
@@ -92,11 +92,9 @@ und für das Gewicht:
 base/Observation?code=29463-7
 
 
-### Skripte mit Bezug zu Covid19 Anfragen.   
-
 #### 9.Skript: CountCovidPatients.R
 
-Mit diesem Skript werden die Patienten IDs ausgelesen und in eiener Tabelle dargestellt, die eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Probe haben.  
+Mit diesem Skript werden die Patienten IDs ausgelesen und in einer csv-Tabelle dargestellt, die eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Probe haben.  
 Die zugehörige FHIR search Anfrage lautet: 
 
 
@@ -104,7 +102,7 @@ base/Observation?code=94500-6
 
 #### 10.Skript: CovidAgeCohorts.R
 
-Mit diesem Skript werden die Patienten IDs ausgelesen und in eiener Tabelle dargestellt, die eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Proben haben.  
+Mit diesem Skript werden diejenigen Patienten IDs ausgelesen und in einer csv-Tabelle dargestellt, d1ie eine Covid19 Diagnose anhand des loinc.code=94500-6 für SARS-CoV-2 RNA Proben haben.
 Die zugehörige FHIR search Anfrage lautet:
 
 

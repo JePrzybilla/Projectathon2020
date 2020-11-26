@@ -11,27 +11,23 @@ if(! dir.exists(output_directory)) {
   setwd(back)
 }else{}
 
-fsq <- paste0( endpoint,
-               "Patient?",
-               "_has:MedicationStatement:patient:",
-               "medication.code=N06AA09"
-               )
+fsq <- paste0( endpoint, "MedicationStatement?",
+               "_count=100")
 print(fsq)
-bundles <- fhir_search(fsq, max_bundles=MaxBundle, verbose = 2, log_errors=2)
-fhir_save(bundles, directory=output_directory)
+
+bundles <- fhir_search(fsq, max_bundles=MaxBundle, verbose = 2)
 bundle_time <- proc.time() 
 
 design <- list(
-  Patient = list(
-    "//Patient"
+  MedicationStatement = list(
+    "//MedicationStatement"
   )
 )
 
-
 list_of_tables <- fhir_crack(bundles, design, sep = " | ", verbose = 2)
 
+setwd(output_directory)
 
-setwd( output_directory )
 fhir_save(bundles, directory=output_directory)
 
 for(n in names(list_of_tables)) {
