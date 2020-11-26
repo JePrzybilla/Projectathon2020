@@ -4,7 +4,7 @@ endpoint <- "https://mii-agiop-3p.life.uni-leipzig.de/fhir/"
 print(endpoint)
 MaxBundle = 500
 
-output_directory <- "./outputGlobal/FindAllMedications_v1"
+output_directory <- "./outputGlobal/FindAllMedicationsStatements_v1"
 
 if(! dir.exists(output_directory)) {
   dir.create(output_directory, recursive = T)

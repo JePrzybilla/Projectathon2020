@@ -9,13 +9,7 @@ output_directory <- "./outputGlobal/FindAllPatients_v3"
 if(! dir.exists(output_directory)) {
   dir.create(output_directory, recursive = T)
   setwd(back)
-}else{
-  #löschen der vorhandenen Dateien im outputGlobal/test1 Ordner.
-  #setwd( output_directory )
-  #flist <- list.files(getwd())  %>% print()
-  #file.remove(flist)
-  #setwd(back)
-}
+}else{}
 
 fsq <- paste0( endpoint, "Patient?")
 
