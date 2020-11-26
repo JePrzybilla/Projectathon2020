@@ -32,6 +32,7 @@ list_of_tables <- fhir_crack(bundles, design, sep = " | ", verbose = 2)
 
 
 setwd( output_directory )
+
 fhir_save(bundles, directory=output_directory)
 
 for(n in names(list_of_tables)) {

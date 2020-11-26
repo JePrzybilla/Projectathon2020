@@ -26,10 +26,12 @@ design <- list(
 
 list_of_tables <- fhir_crack(bundles, design, sep = " | ", verbose = 2)
 setwd( output_directory )
+fhir_save(bundles, directory=output_directory)
 
 for( n in names( list_of_tables ) ) {
   write.table( list_of_tables[[ n ]], file = paste0( n, ".csv" ), na = "", sep = ";", dec = ".", row.names = F, quote = F )
 }
+
 setwd( back )
 
 ti <- (proc.time() - start_time)/60.
