@@ -28,6 +28,7 @@ design1 <- list(
 )
 
 dfs1 <- fhir_crack(bundles, design1)
+
 View(dfs1$Observations)
 
 #Alternative: extract only attributes ones we need
@@ -45,10 +46,12 @@ design2 <- list(
 )
 
 dfs2 <- fhir_crack(bundles, design2)
+
 View(dfs2$Observations)
 
 #only keep positive results
 tests <- dfs2$Observations
+
 tests <- tests[tests$result=="260373001",]
 
 #count the unique Patient references in this set

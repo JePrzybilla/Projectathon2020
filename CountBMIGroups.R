@@ -49,14 +49,18 @@ weights <- dfs_weight$Observation
 
 #check that all values have the same unit
 unique(heights$height_unit) #one unit is kg, there seems to be a mistake 
+
 heights[heights$height_unit=="kg",] #check which one is wrong
+
 heights <- heights[heights$height_unit=="cm",]#only keep valid heights
 
-unique(weights$unit)#everything is finde
+unique(weights$weight_unit)#everything is fine
 
 
 #merge data
 data <- full_join(heights, weights, by="patient")
+
+View(data)
 
 #convert to correct data type
 data$height <- as.numeric(data$height)
@@ -64,6 +68,7 @@ data$weight <- as.numeric(data$weight)
 
 #compute BMI and weight classes
 data$BMI <- data$weight/((data$height/100))^2
+
 data$BMI_class <- cut(data$BMI, 
                       breaks = c(0, 18.5, 25, 30, 35, 40, Inf),
                       labels = c("Underweight", "Normal weight", "Overweight", "Obesity Class 1", "Obesity Class 2", "Obesity Class 3"),
