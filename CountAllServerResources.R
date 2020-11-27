@@ -8,7 +8,7 @@ library(ggplot2)
 print(system('hostname'))
 back <- getwd()
 start_time <- proc.time() 
-
+(time_string <- gsub('[^0-9]*', '', Sys.time()))
 output_directory <- "./outputGlobal/ResultCount"
 
 if(! dir.exists(output_directory)) {
@@ -17,6 +17,7 @@ if(! dir.exists(output_directory)) {
 }else{}
 
 #Change the endpoint here if you want to use another endpoint
+all_endpoints <- list(hapiOpen = "https://mii-agiop-3p.life.uni-leipzig.de/fhir")
 
 all_endpoints <- list(hapiOpen = "https://mii-agiop-3p.life.uni-leipzig.de/fhir")
 sel_endpoints_names <- "hapiOpen"
@@ -41,7 +42,7 @@ all_resources_counts <- lapply(ncl, function(name_server) {
     sapply(df[['type']], function(resource) {
       fsr <- paste0(paste_paths(endpoints[[name_server]], resource), '?_summary=count')
       bundles <- fhir_search(fsr, verbose = 0)
-      tot <- fhir_crack(bundles, list(Tot=list('//Bundle',list('//total'))), verbose = 0)
+      tot <- fhir_crack(bundles, list(Tot=list('//Bundle',list(total='//total'))), verbose = 0)
       i <- as.integer(tot$Tot$total)
       print(paste0(name_server, ' contains ', tot$Tot$total, " ", resource, 's.'))
       i
