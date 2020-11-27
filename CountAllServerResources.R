@@ -18,8 +18,6 @@ if(! dir.exists(output_directory)) {
 
 #Change the endpoint here if you want to use another endpoint
 all_endpoints <- list(hapiOpen = "https://mii-agiop-3p.life.uni-leipzig.de/fhir")
-
-all_endpoints <- list(hapiOpen = "https://mii-agiop-3p.life.uni-leipzig.de/fhir")
 sel_endpoints_names <- "hapiOpen"
 endpoints <- all_endpoints[sel_endpoints_names]
 print(endpoints)
