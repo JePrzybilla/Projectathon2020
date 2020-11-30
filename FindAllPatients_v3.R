@@ -19,9 +19,9 @@ bundle_time <- proc.time()
 
 design <- list(
   Patient = list(
-    "//Patient",
-    list(
-      P.PID      = "id/", 
+    resource = "//Patient",
+    cols = list(
+      P.PID      = "id", 
       VORNAME    = "name/given", 
       NACHNAME   = "name/family",
       GESCHLECHT = "gender", 

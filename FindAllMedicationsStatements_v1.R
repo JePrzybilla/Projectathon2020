@@ -20,7 +20,7 @@ bundle_time <- proc.time()
 
 design <- list(
   MedicationStatement = list(
-    "//MedicationStatement"
+   resource =  "//MedicationStatement"
   )
 )
 

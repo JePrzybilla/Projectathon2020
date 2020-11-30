@@ -25,7 +25,7 @@ bundle_time <- proc.time()
 
 design <- list(
   Patient = list(
-    "//Patient"
+   resource =  "//Patient"
   )
 )
 

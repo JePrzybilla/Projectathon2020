@@ -40,7 +40,7 @@ all_resources_counts <- lapply(ncl, function(name_server) {
     sapply(df[['type']], function(resource) {
       fsr <- paste0(paste_paths(endpoints[[name_server]], resource), '?_summary=count')
       bundles <- fhir_search(fsr, verbose = 0)
-      tot <- fhir_crack(bundles, list(Tot=list('//Bundle',list(total='//total'))), verbose = 0)
+      tot <- fhir_crack(bundles, list(Tot=list(resource = '//Bundle',cols=list(total='//total'))), verbose = 0)
       i <- as.integer(tot$Tot$total)
       print(paste0(name_server, ' contains ', tot$Tot$total, " ", resource, 's.'))
       i

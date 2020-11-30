@@ -26,7 +26,7 @@ bundle_time <- proc.time()
 
 design <- list(
   Observation = list(
-    "//Observation"
+    resource = "//Observation"
   )
 )
 
